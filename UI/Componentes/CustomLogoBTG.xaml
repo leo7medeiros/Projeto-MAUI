@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<baseContent:BaseContentView
+    x:Class="MauiAppProject.UI.Componentes.CustomLogoBTG"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseContent="clr-namespace:MauiAppProject.UI.Pages.BaseContent"
+    xmlns:componentes="clr-namespace:MauiAppProject.UI.Componentes">
+
+    <baseContent:BaseContentView.Content>
+        <componentes:CustomRenderizadorSVG
+            x:Name="RenderizadorSvg"
+            Icone="logo_btg.svg"
+            Proporcao="True" />
+    </baseContent:BaseContentView.Content>
+
+</baseContent:BaseContentView>

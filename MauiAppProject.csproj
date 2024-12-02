@@ -1,0 +1,152 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>MauiAppProject</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>App MAUI</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.mauiappproject</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appiconfg.png" Color="#005495" />
+		<MauiIcon Include="Resources\AppIcon\appiconfg.png" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#005495" BaseSize="178,178" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appiconfg.png" />
+	  <None Remove="Resources\Images\Incorporadas\icone_aviso.svg" />
+	  <None Remove="Resources\Images\Incorporadas\icone_editar.svg" />
+	  <None Remove="Resources\Images\Incorporadas\icone_erro.svg" />
+	  <None Remove="Resources\Images\Incorporadas\icone_excluir.svg" />
+	  <None Remove="Resources\Images\Incorporadas\icone_info.svg" />
+	  <None Remove="Resources\Images\Incorporadas\logo_btg.svg" />
+	  <None Remove="Resources\Splash\splash.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\icone_aviso.svg" />
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\icone_editar.svg" />
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\icone_erro.svg" />
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\icone_excluir.svg" />
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\icone_info.svg" />
+	  <EmbeddedResource Include="Resources\Images\Incorporadas\logo_btg.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.5" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Mopups" Version="1.3.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="SkiaSharp.Extended" Version="2.0.0" />
+		<PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resx\Localicacao.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Localicacao.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Componentes\CustomLogoBTG.xaml.cs">
+	    <DependentUpon>CustomLogoBTG.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Componentes\CustomCardCliente.xaml.cs">
+	    <DependentUpon>CustomCardCliente.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Componentes\CustomPopUpCadastroCliente.xaml.cs">
+	    <DependentUpon>CustomPopUpCadastroCliente.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TelaPrincipalPage.xaml.cs">
+	    <DependentUpon>TelaPrincipalPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resx\Localicacao.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Localicacao.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\Componentes\CustomBotaoGeral.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomBotaoGeral.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomBoxEntry.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomLogoBTG.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomCardCliente.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomPopUpCadastroCliente.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomPopUpConfirmar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomPopUpMensagem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Componentes\CustomRenderizadorSVG.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TelaPrincipalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+</Project>

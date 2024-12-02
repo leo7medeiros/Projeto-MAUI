@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pop:PopupPage
+    x:Class="MauiAppProject.UI.Componentes.CustomPopUpCadastroCliente"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+    xmlns:custom="clr-namespace:MauiAppProject.UI.Componentes"
+    xmlns:p="clr-namespace:MauiAppProject.Resx"
+    xmlns:pop="clr-namespace:Mopups.Pages;assembly=Mopups"
+    BackgroundColor="{StaticResource BACKGROUND_POPUP_SHADOW}"
+    CloseWhenBackgroundIsClicked="False">
+
+    <pop:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            EasingIn="SpringIn"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pop:PopupPage.Animation>
+
+    <Frame
+        Padding="0"
+        BackgroundColor="{StaticResource BACKGROUND_WHITE}"
+        CornerRadius="8"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+        <Grid RowDefinitions="60, Auto, 60">
+            <!--  CABEÇALHO  -->
+            <VerticalStackLayout Grid.Row="0">
+                <Label
+                    Margin="10"
+                    FontAttributes="Bold"
+                    FontSize="Subtitle"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="CADASTRO DE CLIENTE"
+                    TextColor="{StaticResource AZUL_ESCURO_PRIMARIO}" />
+
+                <BoxView
+                    Margin="3,0,3,0"
+                    BackgroundColor="{StaticResource BACKGROUND_LIGHTGRAY}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+            </VerticalStackLayout>
+
+            <!--  CORPO  -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                Margin="10,0,10,20"
+                Spacing="0">
+                <!--  CAMPO NOME  -->
+                <custom:CustomBoxEntry
+                    BackgroundColor="{x:StaticResource TRANSPARENT}"
+                    ErrorText="{Binding ErrorIpHost}"
+                    HasError="{Binding IsErrorIpHost}"
+                    Keyboard="Text"
+                    LabelText="Nome:"
+                    Placeholder=""
+                    ReturnType="Next"
+                    Text="{Binding Nome}"
+                    WidthRequest="310" />
+
+                <!--  CAMPO SOBRENOME  -->
+                <custom:CustomBoxEntry
+                    BackgroundColor="{x:StaticResource TRANSPARENT}"
+                    ErrorText="{Binding ErrorIpHost}"
+                    HasError="{Binding IsErrorIpHost}"
+                    Keyboard="Text"
+                    LabelText="Sobrenome:"
+                    Placeholder=""
+                    ReturnType="Next"
+                    Text="{Binding Sobrenome}"
+                    WidthRequest="310" />
+
+                <!--  CAMPO IDADE  -->
+                <custom:CustomBoxEntry
+                    BackgroundColor="{x:StaticResource TRANSPARENT}"
+                    ErrorText="{Binding ErrorIpHost}"
+                    HasError="{Binding IsErrorIpHost}"
+                    Keyboard="Numeric"
+                    LabelText="Idade:"
+                    Placeholder=""
+                    ReturnType="Next"
+                    Text="{Binding Idade}"
+                    WidthRequest="310" />
+
+                <!--  CAMPO ENDEREÇO  -->
+                <custom:CustomBoxEntry
+                    BackgroundColor="{x:StaticResource TRANSPARENT}"
+                    ErrorText="{Binding ErrorIpHost}"
+                    HasError="{Binding IsErrorIpHost}"
+                    Keyboard="Text"
+                    LabelText="Endereço:"
+                    Placeholder=""
+                    ReturnType="Next"
+                    Text="{Binding Endereco}"
+                    WidthRequest="310" />
+            </VerticalStackLayout>
+
+            <!--  RODAPÉ  -->
+            <VerticalStackLayout Grid.Row="2" Margin="0,0,0,10">
+                <BoxView
+                    Margin="3,0,3,10"
+                    BackgroundColor="{StaticResource BACKGROUND_LIGHTGRAY}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+
+                <Grid Margin="10,0,10,0" ColumnDefinitions="50*, 50*">
+                    <!--  BOTÃO CANCELAR  -->
+                    <custom:CustomBotaoGeral
+                        Grid.Column="0"
+                        Altura="40"
+                        Clicado="Cancelar_Clicked"
+                        HorizontalOptions="StartAndExpand"
+                        Largura="125"
+                        Style="{StaticResource BotaoSecundarioStyle}"
+                        Texto="CANCELAR"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <!--  BOTÃO SALVAR  -->
+                    <custom:CustomBotaoGeral
+                        Grid.Column="1"
+                        Altura="40"
+                        Clicado="Salvar_Clicked"
+                        HorizontalOptions="EndAndExpand"
+                        Largura="125"
+                        Style="{StaticResource BotaoPrimarioStyle}"
+                        Texto="SALVAR"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </Frame>
+
+</pop:PopupPage>
